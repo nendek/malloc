@@ -6,7 +6,7 @@
 /*   By: pnardozi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:16:52 by pnardozi          #+#    #+#             */
-/*   Updated: 2019/06/26 14:16:53 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/06/26 14:40:28 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void		*alloc_large(size_t size)
 	void		*zone;
 
 	tmp = NULL;
-	size = malloc_good_size(size) + 4096;
+	size = malloc_good_size(size) + (size_t)getpagesize;
 	header = g_control->head;
 	while (header)
 	{
@@ -119,7 +119,7 @@ void		*alloc_large(size_t size)
 	header->next = NULL;
 	header->available_mem = 0;
 	header->nb_allocs = 1;
-	header->type = size - 4096;
+	header->type = size - (size_t)getpagesize;
 	if (!(g_control->head))
 		g_control->head = header;
 	else
