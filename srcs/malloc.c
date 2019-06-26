@@ -6,7 +6,7 @@
 /*   By: pnardozi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:16:02 by pnardozi          #+#    #+#             */
-/*   Updated: 2019/06/26 14:16:03 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/06/26 19:58:30 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ t_control	*init(void)
 {
 	t_control *control;
 
-	control = (t_control *)mmap(0, sizeof(t_control),
-			PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	if ((control = (t_control *)mmap(0, sizeof(t_control),
+					PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
+					-1, 0)) == MAP_FAILED)
+		return (NULL);
 	control->total_mem = sizeof(t_control);
 	control->head = NULL;
 	return (control);
@@ -67,6 +69,8 @@ void		*lock_malloc(size_t size)
 		return (NULL);
 	if (!g_control)
 		g_control = init();
+	if (!g_control)
+		return (NULL);
 	if (size <= TINY)
 		return (get_alloc(size, TINY_ZONE));
 	else if (size <= SMALL)

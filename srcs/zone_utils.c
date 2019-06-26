@@ -6,7 +6,7 @@
 /*   By: pnardozi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:16:52 by pnardozi          #+#    #+#             */
-/*   Updated: 2019/06/26 14:40:28 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/06/26 19:59:06 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void		*init_zone(size_t zone_size)
 	t_header	*tmp;
 	t_chunk		*chunk;
 
-	if (!(ret = mmap(0, zone_size, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if ((ret = mmap(0, zone_size, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	chunk = (t_chunk *)((size_t)ret + (zone_size / 2));
 	chunk->left = NULL;
@@ -105,21 +105,21 @@ void		*alloc_large(size_t size)
 	void		*zone;
 
 	tmp = NULL;
-	size = malloc_good_size(size) + (size_t)getpagesize;
+	size = malloc_good_size(size) + (size_t)getpagesize();
 	header = g_control->head;
 	while (header)
 	{
 		tmp = header;
 		header = header->next;
 	}
-	if (!(zone = mmap(0, size, PROT_READ | PROT_WRITE,
-					MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if ((zone = mmap(0, size, PROT_READ | PROT_WRITE,
+					MAP_ANON | MAP_PRIVATE, -1, 0)) == MAP_FAILED)
 		return (NULL);
 	header = (t_header *)zone;
 	header->next = NULL;
 	header->available_mem = 0;
 	header->nb_allocs = 1;
-	header->type = size - (size_t)getpagesize;
+	header->type = size - (size_t)getpagesize();
 	if (!(g_control->head))
 		g_control->head = header;
 	else

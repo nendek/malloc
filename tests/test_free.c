@@ -6,7 +6,7 @@
 /*   By: arobion <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:34:38 by arobion           #+#    #+#             */
-/*   Updated: 2019/06/25 16:35:18 by arobion          ###   ########.fr       */
+/*   Updated: 2019/06/26 17:14:06 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int main()
 	char *addr; 
 
 	i = 0; 
-	while (i < 1060) 
+	while (i < 1024) 
 	{ 
-		addr = (char*)malloc(992); 
+		addr = (char*)malloc(1024); 
 		addr[0] = 42; 
 		free(addr); 
 		i++; 

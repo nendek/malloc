@@ -6,7 +6,7 @@
 /*   By: pnardozi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:14:39 by pnardozi          #+#    #+#             */
-/*   Updated: 2019/06/26 14:14:42 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/06/26 18:01:16 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define TINY 992
+# define TINY 1024
 # define TINY_ZONE 2 * 1024 * 1024
 # define MAX_DEPTH 16
 # define SMALL 127 * 1024 - 1

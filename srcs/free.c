@@ -6,7 +6,7 @@
 /*   By: pnardozi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 14:15:23 by pnardozi          #+#    #+#             */
-/*   Updated: 2019/06/26 14:40:11 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/06/26 19:33:44 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		handle_unmap(t_header *head)
 	}
 	if (g_control->head == NULL)
 	{
-		munmap((void *)g_control, (size_t)getpagesize);
+		munmap((void *)g_control, (size_t)getpagesize());
 		g_control = NULL;
 	}
 }
@@ -48,14 +48,14 @@ void		free_large(t_header *head)
 	tmp = g_control->head;
 	if (tmp == head)
 	{
-		munmap((void *)head, head->type + (size_t)getpagesize);
+		munmap((void *)head, head->type + (size_t)getpagesize());
 		g_control->head = NULL;
 		return ;
 	}
 	while (tmp->next != head)
 		tmp = tmp->next;
 	tmp->next = head->next;
-	munmap((void *)head, head->type + (size_t)getpagesize);
+	munmap((void *)head, head->type + (size_t)getpagesize());
 }
 
 void		lock_free(void *ptr)

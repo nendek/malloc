@@ -6,7 +6,7 @@
 /*   By: arobion <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:58:00 by arobion           #+#    #+#             */
-/*   Updated: 2019/06/25 17:09:01 by arobion          ###   ########.fr       */
+/*   Updated: 2019/06/26 19:49:13 by pnardozi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 
 int main() 
 { 
@@ -28,4 +29,23 @@ int main()
 		write(1, "NULL2\n", 6);
 	else
 		write(1, "SUCCESS2\n", 9);
+	if (!(addr = malloc(SSIZE_MAX)))
+		write(1, "NULL3\n", 6);
+	else
+		write(1, "SUCCESS3\n", 9);
+
+	if (!(addr = malloc(SSIZE_MAX + 10000000)))
+		write(1, "NULL4\n", 6);
+	else
+		write(1, "SUCCESS4\n", 9);
+	
+	if (!(addr = malloc(SSIZE_MAX - 40000000)))
+		write(1, "NULL5\n", 6);
+	else
+		write(1, "SUCCESS5\n", 9);
+
+	if (!(addr = malloc(SSIZE_MAX - 40)))
+		write(1, "NULL5\n", 6);
+	else
+		write(1, "SUCCESS5\n", 9);
 }
