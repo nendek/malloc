@@ -6,7 +6,7 @@
 /*   By: arobion <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:58:00 by arobion           #+#    #+#             */
-/*   Updated: 2019/06/26 19:49:13 by pnardozi         ###   ########.fr       */
+/*   Updated: 2019/07/01 15:10:55 by arobion          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main()
 		write(1, "SUCCESS5\n", 9);
 
 	if (!(addr = malloc(SSIZE_MAX - 40)))
-		write(1, "NULL5\n", 6);
+		write(1, "NULL6\n", 6);
 	else
 		write(1, "SUCCESS5\n", 9);
 }
